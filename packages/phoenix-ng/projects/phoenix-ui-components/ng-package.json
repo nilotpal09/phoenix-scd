@@ -1,0 +1,7 @@
+{
+  "dest": "dist",
+  "lib": {
+    "entryFile": "./lib/public_api.ts"
+  },
+  "allowedNonPeerDependencies": ["."]
+}

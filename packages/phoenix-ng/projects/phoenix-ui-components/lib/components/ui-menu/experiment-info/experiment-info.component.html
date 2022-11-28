@@ -1,0 +1,24 @@
+<div id="experimentInfo" class="experimentInfo" cdkDrag cdkDragBoundary="body">
+  <a
+    class="experimentLogoWrapper"
+    target="_blank"
+    rel="noopener noreferrer"
+    *ngIf="url"
+    [href]="url"
+  >
+    <img class="experimentLogo" [src]="logo" alt="" />
+  </a>
+  <div class="textInfo">
+    <p *ngIf="tagline">
+      <b>{{ tagline }}</b>
+    </p>
+    <p *ngFor="let infoField of experimentInfo">
+      <ng-container *ngIf="infoField.label">
+        <b>{{ infoField.label }}: </b>{{ infoField.value }}
+      </ng-container>
+      <ng-container *ngIf="!infoField.label">
+        {{ infoField }}
+      </ng-container>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<mat-menu class="mat-menu" #menu>
+  <button
+    mat-menu-item
+    (click)="
+      $event.stopPropagation();
+      clippingCheckbox._inputElement.nativeElement.click()
+    "
+  >
+    <mat-checkbox
+      #clippingCheckbox
+      [checked]="clippingEnabled"
+      (click)="$event.stopPropagation()"
+      (change)="toggleClipping($event)"
+      >Clipping
+    </mat-checkbox>
+  </button>
+  <button
+    class="slider-btn"
+    mat-menu-item
+    (focus)="startingAngleSlider.focus()"
+  >
+    <mat-slider
+      #startingAngleSlider
+      min="0"
+      max="360"
+      step="1"
+      thumbLabel
+      [value]="startClippingAngle"
+      (click)="$event.stopPropagation()"
+      (input)="changeStartClippingAngle($event)"
+    >
+    </mat-slider
+    >Start Angle
+  </button>
+  <button class="slider-btn" mat-menu-item (focus)="openingAngleSlider.focus()">
+    <mat-slider
+      #openingAngleSlider
+      min="0"
+      max="360"
+      step="1"
+      thumbLabel
+      [value]="openingClippingAngle"
+      (click)="$event.stopPropagation()"
+      (input)="changeOpeningClippingAngle($event)"
+    >
+    </mat-slider
+    >Opening Angle
+  </button>
+</mat-menu>
+
+<app-menu-toggle
+  [matMenuTriggerFor]="menu"
+  tooltip="Geometry clipping"
+  icon="clipping"
+  [active]="clippingEnabled"
+>
+</app-menu-toggle>

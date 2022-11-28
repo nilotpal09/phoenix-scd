@@ -1,0 +1,43 @@
+{
+  "name": "phoenix-ui-components",
+  "version": "2.10.0",
+  "description": "Reusable Angular components of the Phoenix event display application.",
+  "author": "Phoenix contributors (https://github.com/HSF/phoenix/graphs/contributors)",
+  "license": "Apache-2.0",
+  "homepage": "http://github.com/HSF/phoenix/tree/master/packages/phoenix-ng/projects/phoenix-ui-components#readme",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HSF/phoenix.git"
+  },
+  "files": [
+    "dist",
+    "_theming.scss"
+  ],
+  "scripts": {
+    "prepublishOnly": "ng build phoenix-ui-components --configuration production && rimraf ./dist/package.json"
+  },
+  "peerDependencies": {
+    "@angular/common": "*",
+    "@angular/compiler": "*",
+    "@angular/core": "*",
+    "@angular/platform-browser-dynamic": "*",
+    "phoenix-event-display": "*",
+    "zone.js": "*"
+  },
+  "dependencies": {
+    "@angular/cdk": "^13.3.7",
+    "@angular/material": "^13.3.7",
+    "@rp3e11/ngx-slider": "^13.0.1",
+    "css-element-queries": "^1.2.3",
+    "qrcode": "1.5.0",
+    "three": "^0.140.2",
+    "tslib": "^2.4.0"
+  },
+  "module": "dist/fesm2015/phoenix-ui-components.mjs",
+  "es2020": "dist/fesm2020/phoenix-ui-components.mjs",
+  "esm2020": "dist/esm2020/phoenix-ui-components.mjs",
+  "fesm2020": "dist/fesm2020/phoenix-ui-components.mjs",
+  "fesm2015": "dist/fesm2015/phoenix-ui-components.mjs",
+  "typings": "dist/phoenix-ui-components.d.ts",
+  "sideEffects": false
+}

@@ -1,0 +1,57 @@
+{
+  "name": "phoenix-event-display",
+  "version": "2.10.0",
+  "description": "API for web-based experiment independent event display.",
+  "main": "dist/index",
+  "types": "dist/index",
+  "author": "Phoenix contributors (https://github.com/HSF/phoenix/graphs/contributors)",
+  "license": "Apache-2.0",
+  "homepage": "http://github.com/HSF/phoenix/tree/master/packages/phoenix-event-display#readme",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HSF/phoenix.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "tsc": "tsc",
+    "tsc:build": "tsc -p tsconfig.build.json",
+    "start": "yarn tsc:build --watch",
+    "build": "rimraf ./dist && yarn tsc:build",
+    "build:es2015": "yarn tsc:build --module es2015 --target es2015 --outDir dist/es2015",
+    "build:esm": "yarn tsc:build --module es2015 --target es5 --outDir dist/esm",
+    "build:cjs": "yarn tsc:build --module commonjs --target es5 --outDir dist/cjs",
+    "build:bundle": "webpack -c configs/webpack.conf.js",
+    "tsc-d": "yarn tsc:build --declaration --emitDeclarationOnly --esModuleInterop --outFile dist/index.d.ts",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn build:bundle",
+    "docs": "node scripts/gen-api-docs.js",
+    "docs:coverage": "yarn compodoc -p configs/compodoc.conf.json --coverageTest 100",
+    "test": "karma start configs/karma.conf.js --browsers=ChromeHeadlessCI",
+    "test:coverage": "yarn test",
+    "prettier": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore",
+    "prettier:check": "yarn prettier --check .",
+    "prettier:write": "yarn prettier --write .",
+    "eslint": "eslint src/**/*.ts --ignore-path ../../.gitignore",
+    "eslint:fix": "yarn eslint --fix"
+  },
+  "dependencies": {
+    "@tweenjs/tween.js": "^17.4.0",
+    "dat.gui": "^0.7.9",
+    "jszip": "^3.10.0",
+    "stats-js": "^1.0.1",
+    "three": "^0.140.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.18.0",
+    "@compodoc/compodoc": "^1.1.19",
+    "@types/dat.gui": "^0.7.7",
+    "@types/three": "^0.140.0",
+    "esbuild-loader": "^2.19.0",
+    "karma-typescript": "~5.5.3",
+    "karma-typescript-es6-transform": "~5.5.3",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
+}

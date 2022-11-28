@@ -1,0 +1,16 @@
+#uiMenu,
+#phoenixMenu,
+#mainLogo,
+#statsElement {
+  transition: opacity 0.4s;
+}
+
+.ss-mode {
+  #uiMenu,
+  #phoenixMenu,
+  #mainLogo,
+  #statsElement {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
