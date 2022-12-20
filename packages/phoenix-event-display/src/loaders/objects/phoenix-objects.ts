@@ -1,6 +1,7 @@
 import {
   Vector3,
   Object3D,
+  Color,
   CatmullRomCurve3,
   TubeBufferGeometry,
   MeshToonMaterial,
@@ -698,46 +699,23 @@ export class PhoenixObjects {
     type: any,
     layer: number,
     vtx: any,
-    color: any
+    color: string,
+    energy: any,
+    opacity: any,
    }): Object3D {
-    const length = scdCells.vtx[9] - scdCells.vtx[0];
-    const width = scdCells.vtx[9] - scdCells.vtx[0];
 
     const verticesOfCube = [];
     for (let i = 0; i < 24; i += 3) {
       verticesOfCube.push( new Vector3(scdCells.vtx[i],scdCells.vtx[i+1],scdCells.vtx[i+2]));
     }
     const geometry = new ConvexGeometry(verticesOfCube);
-
-    // let color_ = 0x2194ce;
-    // if (scdCells.layer <= 2){
-    //   color_ = 0xffff00;
-    // }
-
-    let color_ =0x6ede8a;
-    switch (scdCells.layer) {
-      case 1:
-        color_ = 0x92e6a7;
-        break;
-      case 2:
-        color_ = 0xb7efc5;
-        break;
-      case 3:
-        color_ = 0x8189ff;
-        break;
-      case 4:
-        color_ = 0x96a2ff;
-        break;
-      case 5:
-        color_ = 0xaeb8ff;
-        break;
-    }
+    const cell_color = new Color(scdCells.color);
 
     // material
     const material = new MeshPhongMaterial({
-      color: color_ ?? EVENT_DATA_TYPE_COLORS.SCDCaloCells,
+      color: cell_color,
       transparent: true,
-      opacity: 1
+      opacity: scdCells.opacity
       // wireframe: true
     });
 

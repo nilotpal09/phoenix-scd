@@ -46,8 +46,8 @@ export class ScdComponent implements OnInit {
       defaultEvent = eventConfig;
     } else {
       defaultEvent = {
-        eventFile: 'assets/files/scd/scd_single_jet_with_polyhedra_chunked.json',  
-        // eventFile: 'assets/files/scd/scd_ttbar_with_polyhedra_chunked.json', 
+        // eventFile: 'assets/files/scd/scd_single_jet_with_polyhedra_chunked.json',  
+        eventFile: 'assets/files/scd/scd_ttbar_with_polyhedra_chunked.json', 
         eventType: 'json',
       };
     }
