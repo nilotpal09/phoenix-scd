@@ -294,75 +294,32 @@ export class PhoenixLoader implements EventDataLoader {
     }
 
     // copied from CaloClusters
-    if (eventData.SCDCaloCells) {
+    if (eventData.IrregularCaloCells) {
       // (Optional) Cuts can be added to any physics object.
       const cuts = [
         new Cut('layer', 0, 10),
       ];
 
-      const scaleSCDCaloCells = (value: number) => {
+      const scaleIrregularCaloCells = (value: number) => {
         this.graphicsLibrary
           .getSceneManager()
-          .scaleChildObjects('SCDCaloCells', value, 'z');
+          .scaleChildObjects('IrregularCaloCells', value, 'z');
       };
-      const addSCDCaloCellOptions = this.addScaleOptions(
-        'scdCaloCellsScale',
-        'SCDCaloCells Scale',
-        scaleSCDCaloCells
+      const addIrregularCaloCellOptions = this.addScaleOptions(
+        'IrregularCaloCellsScale',
+        'IrregularCaloCells Scale',
+        scaleIrregularCaloCells
       );
 
       this.addObjectType(
-        eventData.SCDCaloCells,
-        PhoenixObjects.getSCDCaloCell,
-        'SCDCaloCells',
+        eventData.IrregularCaloCells,
+        PhoenixObjects.getIrregularCaloCell,
+        'IrregularCaloCells',
         false,
         cuts,
-        addSCDCaloCellOptions
+        addIrregularCaloCellOptions
       );
     }
-
-
-
-    // // copied from PlanarcaloCells (doesn't work)
-    // if (eventData.SCDCaloCells) {
-    //   // (Optional) Cuts can be added to any physics object.
-    //   const cuts = [new Cut('energy', 0, 10000)];
-
-    //   const scaleSCDCaloCells = (value: number) => {
-    //     this.graphicsLibrary
-    //       .getSceneManager()
-    //       .scaleChildObjects('SCDCaloCells', value, 'z');
-    //   };
-    //   const addSCDCaloCellsOptions = this.addScaleOptions(
-    //     'scdCaloCellsScale',
-    //     'SCDCaloCells Scale',
-    //     scaleSCDCaloCells
-    //   );
-
-    //     // !!! don't understand this
-    //   const collections = {};
-    //   for (const collectionName in eventData.SCDCaloCells) {
-    //     const collection = eventData.SCDCaloCells[collectionName];
-
-    //     // const plane = collection['scdCells'];
-    //     // const unitVector = new Vector3(...plane.slice(0, 3)).normalize();
-
-    //     // collection['cells'].forEach(
-    //     //   (cell: any) => (cell['vtx'] = [...unitVector.toArray(), plane[3]])
-    //     // );
-
-    //     collections[collectionName] = collection['cells'];
-    //   }
-
-    //   this.addObjectType(
-    //     collections,
-    //     PhoenixObjects.getSCDCaloCell,
-    //     'SCDCaloCells',
-    //     false,
-    //     cuts,
-    //     addSCDCaloCellsOptions
-    //   );
-    // }
 
     if (eventData.Muons) {
       const cuts = [

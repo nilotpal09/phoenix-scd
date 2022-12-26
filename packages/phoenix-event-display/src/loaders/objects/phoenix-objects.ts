@@ -640,92 +640,42 @@ export class PhoenixObjects {
     return object;
   }
 
-  // /**
-  //  * Process the SCDCell from the given parameters and get it as a geometry.
-  //  * @param scdCells Energy of the SCDCell.
-  //  * @returns SCD Calorimeter Cell object. (cosh geometry)
-  //  */
-  //  public static getSCDCaloCell(scdCells: any): Object3D {
-
-  //   const vtx_coordinates = scdCells.vtx;
-  //   const verticesOfCube = [];
-  //   for (let i = 0; i < 24; ++i) {
-  //     verticesOfCube.push(scdCells.vtx[i]);
-  //   }
-  //   const indicesOfFaces = [
-  //     0,1,2, 0,2,3, 2,3,6, 3,6,7,
-  //     4,6,7, 4,5,6, 0,1,4, 1,4,5,
-  //     1,2,6, 1,5,6, 0,3,7, 0,4,7,
-  //   ];
-
-  //   // geometry
-  //   const geometry = new PolyhedronGeometry(
-  //     verticesOfCube,
-  //     indicesOfFaces,
-  //     6, 
-  //     2);
-
-  //   // material
-  //   const material = new MeshPhongMaterial({
-  //     color: scdCells.color ?? EVENT_DATA_TYPE_COLORS.SCDCaloCells,
-  //   });
-
-  //   // object
-  //   const polyhadron = new Mesh(geometry, material);
-
-  //   // Disabling for now because the data isn't readable on object selection.
-  //   // linesObj.userData = Object.assign({}, hitParamsClone);
-  //   polyhadron.userData = {};
-  //   polyhadron.name = 'SCDCaloCell';
-  //   // Setting uuid for selection from collections info
-  //   scdCells.uuid = polyhadron.uuid;
-
-  //   return polyhadron;
-  // }
-
-
-
-
-
   /**
-   * Process the Cluster from the given parameters and get it as a geometry.
-   * @param clusterParams Parameters for the Cluster.
-   * @param drawRadius Radius where to draw barrel Clusters
-   * @param drawZ Plane in z where to draw endcap Clusters
-   * @param energyScaling Amount to multply the energy by to get the depth of the cell
-   * @returns Cluster object.
+   * Type for drawing irregular calorimeter cell comprising 8 xyz vertices in arbitrary geometry.
+   * @param layer Calorimeter layer
+   * @param vtx Flattened list of 8 vertex coordinates (24 floats)
+   * @param color [R,G,B] integer list
+   * @param opacity value from 0 to 1
+   * @returns the cell
    */
-   public static getSCDCaloCell(scdCells: {    
+   public static getIrregularCaloCell(irrCells: {    
     type: any,
     layer: number,
     vtx: any,
     color: string,
-    energy: any,
     opacity: any,
    }): Object3D {
 
     const verticesOfCube = [];
     for (let i = 0; i < 24; i += 3) {
-      verticesOfCube.push( new Vector3(scdCells.vtx[i],scdCells.vtx[i+1],scdCells.vtx[i+2]));
+      verticesOfCube.push( new Vector3(irrCells.vtx[i],irrCells.vtx[i+1],irrCells.vtx[i+2]));
     }
     const geometry = new ConvexGeometry(verticesOfCube);
-    const cell_color = new Color(scdCells.color);
+    const cell_color = new Color("rgb(" + irrCells.color[0].toString() + "," + irrCells.color[1].toString() + "," + irrCells.color[2].toString() + ")");
 
     // material
     const material = new MeshPhongMaterial({
       color: cell_color,
       transparent: true,
-      opacity: scdCells.opacity
+      opacity: irrCells.opacity
       // wireframe: true
     });
 
     // object
-    const cube = new Mesh(geometry, material);
-    cube.userData = Object.assign({});
-    cube.name = 'SCDCaloCell';
-    // // Setting uuid for selection from collections info
-    // clusterParams.uuid = cube.uuid;
+    const cell = new Mesh(geometry, material);
+    cell.userData = Object.assign({});
+    cell.name = 'IrregularCaloCell';
 
-    return cube;
+    return cell;
   }
 }
