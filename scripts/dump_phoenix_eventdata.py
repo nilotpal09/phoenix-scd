@@ -53,7 +53,7 @@ def get_track_traj(d0, z0, theta, phi0, qoverp):
     
     rs = np.sqrt( xs**2+ys**2 )
 
-    stop_idx = np.where(rs >1500)[0]
+    stop_idx = np.where(np.logical_or(rs >1500,np.abs(zs)>3193.9))[0]
 
     if len(stop_idx) > 0:
         stop_idx = stop_idx[0]
@@ -68,6 +68,8 @@ def get_track_traj(d0, z0, theta, phi0, qoverp):
 
 def get_topoclusters(cell_topo_idx, cell_eta, cell_phi, cell_e):
     
+    if len(cell_topo_idx) == 0:
+        return []
     n_topoclusters = max(cell_topo_idx)
 
     topoclusters = []
@@ -137,6 +139,8 @@ def get_color(layer,scaleby):
 
 def get_vertices(cell_x, cell_y, cell_z, cell_l, cell_e, vertices_df, dump_vertices=False, dump_centres=False):
     
+    if len(cell_x) == 0:
+        return []
     merge_supercells = True
     size = 0.2
     vertices = []
